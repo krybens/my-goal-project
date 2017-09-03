@@ -1,0 +1,12 @@
+<h1>Tasks List</h1>
+<div class="task-list" data-bind = "template: { name: 'task-template', foreach: tasks }"></div>
+
+<button  data-bind="click: addTask">add task</button>
+
+<script type = "text/html" id = "task-template">
+    <div class="task-item">
+        <h3 data-bind = "text: title"></h3>
+        <p>Description: <span data-bind = "text: description"></span></p>
+        <button  data-bind="click: $parent.removeTask">remove</button>
+    </div>
+</script>

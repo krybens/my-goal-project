@@ -1,0 +1,6 @@
+.footer-component {
+    & {
+        padding: 20px 0;
+        background: yellowgreen;
+    }
+}

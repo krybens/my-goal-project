@@ -1,0 +1,9 @@
+.aside-component {
+    & {
+        min-height: 1500px;
+        width: 30%;
+        float: left;
+
+        background: palevioletred;
+    }
+}

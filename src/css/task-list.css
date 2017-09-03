@@ -1,0 +1,11 @@
+.task-list {
+    & {
+        padding: 20px;
+    }
+
+    > .task-item {
+        float: left;
+        margin-right: 20px;
+        margin-bottom: 20px;
+    }
+}
