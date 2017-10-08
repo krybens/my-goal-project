@@ -3,6 +3,10 @@ define(['jquery', 'jquery-ui'], function($) {
         this.addTaskForm = function() {
             $('.add-task-form').dialog();
         };
+
+        this.closeDialog = function() {
+            $('.add-task-form').dialog("close");
+        };
     }
 
     return new Modal();

@@ -5,7 +5,7 @@
 
 <div style="display: none">
     <div class="add-task-form">
-        <form data-bind="with: newTask, submit: saveTask">
+        <form data-bind="with: itemForEditing, submit: saveTask">
             <input name="title" placeholder="title" type="text" data-bind="value: title">
             <textarea name="description" placeholder="description" data-bind="value: description"></textarea>
             <button>save</button>
