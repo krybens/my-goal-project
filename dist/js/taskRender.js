@@ -19,7 +19,7 @@ define(['jquery', 'ko', 'text!taskTemplate.html', 'modal'], function ($, ko, tem
             }
         };
 
-        this.tasks = ko.observableArray([
+        this.tasks = [
             new Task({
                 title: 'Play the guitar',
                 description: 'I want to play the guitar'
@@ -28,6 +28,19 @@ define(['jquery', 'ko', 'text!taskTemplate.html', 'modal'], function ($, ko, tem
                 title: 'Money',
                 description: 'I want to get a lot of money'
             })
+        ];
+
+        this.categories = ko.observableArray([
+            {
+                id: 0,
+                title: 'music',
+                description: 'skils which i want to achieve in music'
+            },
+            {
+                id: 1,
+                title: 'material',
+                description: 'my material position'
+            }
         ]);
 
         this.selectedTask = ko.observable();
@@ -78,11 +91,6 @@ define(['jquery', 'ko', 'text!taskTemplate.html', 'modal'], function ($, ko, tem
 
     }
 
-    return {
-        init: function () {
-            $("#content").html(template);
-            ko.applyBindings(new Model());
-        }
-    }
+    return Model;
 
 });

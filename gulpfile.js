@@ -4,13 +4,14 @@ const gulp = require('gulp'),
     postcss = require('gulp-postcss'),
     scss = require('postcss-scss'),
     sourcemaps = require('gulp-sourcemaps'),
+    concat = require('gulp-concat-css');
 
     //server
     connect = require('gulp-connect');
 
 
 const paths = {
-    postcss: ['src/css/styles.css'],
+    postcss: ['components/**/style.css'],
     postcss_watch: ['src/css/**/*.css']
 };
 
@@ -25,6 +26,6 @@ gulp.task('css', function () {
             zindex: false,
             discardUnused: {fontFace: false}
         })], {syntax: scss}))
-        .pipe(sourcemaps.write('.'))
+        .pipe(concat('styles.css'))
         .pipe(gulp.dest('dist/css'));
 });

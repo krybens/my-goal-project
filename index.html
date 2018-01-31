@@ -1,20 +1,18 @@
 <html>
     <head>
         <link rel="stylesheet" href="dist/css/styles.css">
-        <script src = "https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.3.0.js"
-                type = "text/javascript"></script>
+        <script data-main="dist/js/scripts" src="node_modules/requirejs/require.js"></script>
+        <script src="dist/js/config.js"></script>
     </head>
     <body>
         <header class="header-component">
             header
         </header>
         <aside class="aside-component">
-            aside
+            <categories-list></categories-list>
         </aside>
         <main class="main-content" id="content">
-
+            <task-list></task-list>
         </main>
-        <script data-main="dist/js/scripts" src="node_modules/requirejs/require.js"></script>
-        <script src="dist/js/config.js"></script>
     </body>
 </html>

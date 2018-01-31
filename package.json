@@ -52,6 +52,7 @@
     "vinyl-transform": "^1.0.0"
   },
   "devDependencies": {
+    "gulp-concat-css": "^3.0.0",
     "gulp-connect": "^5.0.0",
     "gulp-dev-server": "^1.1.3"
   }
