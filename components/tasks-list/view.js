@@ -1,4 +1,4 @@
-define(['jquery', 'ko', 'modal'], function ($, ko, template, modal) {
+define(['jquery', 'ko', 'dist/js/modal'], function ($, ko, modal) {
     function Model() {
         var self = this;
 
@@ -19,7 +19,7 @@ define(['jquery', 'ko', 'modal'], function ($, ko, template, modal) {
             }
         };
 
-        this.tasks = [
+        this.tasks = ko.observableArray([
             new Task({
                 title: 'Play the guitar',
                 description: 'I want to play the guitar'
@@ -28,28 +28,10 @@ define(['jquery', 'ko', 'modal'], function ($, ko, template, modal) {
                 title: 'Money',
                 description: 'I want to get a lot of money'
             })
-        ];
-
-        this.categories = ko.observableArray([
-            {
-                id: 0,
-                title: 'music',
-                description: 'skils which i want to achieve in music'
-            },
-            {
-                id: 1,
-                title: 'material',
-                description: 'my material position'
-            }
         ]);
 
         this.selectedTask = ko.observable();
         this.itemForEditing = ko.observable();
-
-        this.addTaskForm = function () {
-            self.itemForEditing(new Task());
-            modal.addTaskForm();
-        };
 
         this.editTaskForm = function (task) {
             self.selectedTask(task);
@@ -58,6 +40,7 @@ define(['jquery', 'ko', 'modal'], function ($, ko, template, modal) {
         };
 
         this.saveTask = function (form) {
+            debugger;
             var selected = self.selectedTask(),
                 edited = ko.toJS(self.itemForEditing()); //clean copy of edited
 
@@ -75,8 +58,15 @@ define(['jquery', 'ko', 'modal'], function ($, ko, template, modal) {
             modal.closeDialog();
         };
 
-        this.removeTask = function ($item) {
-            self.tasks.remove($item);
+        this.removeTask = function (item) {
+            self.tasks.remove(item);
+        };
+
+        //todo: to make separate component
+
+        this.addTaskForm = function () {
+            self.itemForEditing(new Task());
+            modal.addTaskForm();
         };
 
         this.prepareForm = function (form) {
@@ -88,7 +78,6 @@ define(['jquery', 'ko', 'modal'], function ($, ko, template, modal) {
 
             return obj;
         }
-
     }
 
     return Model;

@@ -1,0 +1,16 @@
+<h1>Tasks List</h1>
+<div class="task-list" data-bind = "foreach: tasks">
+    <task-item params="data: $data, super: $parent"></task-item>
+</div>
+
+<button class="js-add-task"  data-bind="click: addTaskForm">add task</button>
+
+<div style="display: none">
+    <div class="add-task-form">
+        <form data-bind="with: itemForEditing, submit: saveTask">
+            <input name="title" placeholder="title" type="text" data-bind="value: title">
+            <textarea name="description" placeholder="description" data-bind="value: description"></textarea>
+            <button>save</button>
+        </form>
+    </div>
+</div>
