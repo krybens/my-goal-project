@@ -1,6 +1,6 @@
 define(['ko'], function (ko) {
-    function viewModel() {
-        this.categories = ko.observableArray([
+    return {
+        categories: [
             {
                 id: 0,
                 title: 'music',
@@ -11,8 +11,6 @@ define(['ko'], function (ko) {
                 title: 'material',
                 description: 'my material position'
             }
-        ]);
+        ],
     }
-
-    return viewModel;
 });

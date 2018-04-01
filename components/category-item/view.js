@@ -1,9 +1,10 @@
-define(['ko'], function (ko) {
+define(['ko', 'model/tasks'], function (ko, tasksModel) {
     function viewModel(category) {
         this.title = category.data.title;
+        this.id = category.data.id;
 
-        this.chooseCategory = function() {
-
+        this.chooseCategory = function(categoryItem) {
+            tasksModel.filterTasksByCategoryId(categoryItem.id);
         }
     }
 

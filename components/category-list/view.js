@@ -1,17 +1,6 @@
-define(['ko', 'koStore'], function (ko, store) {
+define(['ko', 'model/categories'], function (ko, categoriesModel) {
     function viewModel() {
-        this.categories = ko.observableArray([
-            {
-                id: 0,
-                title: 'music',
-                description: 'skils which i want to achieve in music'
-            },
-            {
-                id: 1,
-                title: 'material',
-                description: 'my material position'
-            }
-        ]);
+        this.categories = ko.observableArray(categoriesModel.categories);
     }
 
     return viewModel;

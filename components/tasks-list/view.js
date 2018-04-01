@@ -1,55 +1,39 @@
-define(['jquery', 'ko', 'dist/js/modal'], function ($, ko, modal) {
+define(['jquery', 'ko', 'dist/js/modal', 'model/tasks', 'model/categories'], function ($, ko, modal, tasksModel, categoriesModel) {
     function Model() {
         var self = this;
 
         function Task(task) {
             this.title = ko.observable();
             this.description = ko.observable();
-
-            this.update(task);
+            this.categoryId = null;
+            this.taskId = null;
         }
 
-        Task.prototype.update = function (task) {
-            if (task) {
-                this.title(task.title || "new item");
-                this.description(task.description || "description");
-            } else {
-                this.title("new item");
-                this.description("description");
-            }
-        };
+        this.tasks = ko.observable(tasksModel.tasks);
 
-        this.tasks = ko.observableArray([
-            new Task({
-                title: 'Play the guitar',
-                description: 'I want to play the guitar'
-            }),
-            new Task({
-                title: 'Money',
-                description: 'I want to get a lot of money'
-            })
-        ]);
+        tasksModel.currentState.subscribe(function(newValue) {
+            self.tasks(newValue);
+        });
+
+
+        this.categoriesList = ko.observable(categoriesModel.categories);
 
         this.selectedTask = ko.observable();
         this.itemForEditing = ko.observable();
 
         this.editTaskForm = function (task) {
             self.selectedTask(task);
-            self.itemForEditing(new Task(ko.toJS(task)));
+            self.itemForEditing(ko.toJS(task));
             modal.addTaskForm();
         };
 
         this.saveTask = function (form) {
-            debugger;
-            var selected = self.selectedTask(),
+            var self = this;
+                selected = self.selectedTask(),
                 edited = ko.toJS(self.itemForEditing()); //clean copy of edited
 
             //apply updates from the edited item to the selected item
-            if (selected) {
-                selected.update(edited);
-            } else {
-                self.tasks.push(new Task(self.prepareForm($(form).serializeArray())));
-            }
+            tasksModel.saveTask(self.prepareForm($(form).serializeArray()));
 
             //clear selected item
             self.selectedTask(null);
@@ -60,6 +44,18 @@ define(['jquery', 'ko', 'dist/js/modal'], function ($, ko, modal) {
 
         this.removeTask = function (item) {
             self.tasks.remove(item);
+        };
+
+        this.updateTask = function (task, selectedTask) {
+            if (task) {
+                selectedTask.title(task.title || "new item");
+                selectedTask.description(task.description || "description");
+                selectedTask.categoryId = task.categoryId;
+                selectedTask.taskId = task.categoryId;
+            } else {
+                this.title("new item");
+                this.description("description");
+            }
         };
 
         //todo: to make separate component
